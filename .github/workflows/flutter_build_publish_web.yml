@@ -8,6 +8,8 @@ name: Flutter Web
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'lib'
 jobs:
   web_build_and_deploy:
     name: Example Web Page
