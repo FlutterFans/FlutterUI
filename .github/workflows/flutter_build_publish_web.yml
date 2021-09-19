@@ -30,7 +30,7 @@ jobs:
           flutter build web --web-renderer canvaskit --release
       - name: "Web Deploy 🚀"
         # https://github.com/JamesIves/github-pages-deploy-action
-        uses: JamesIves/github-pages-deploy-action@4.0.0
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           token: '${{ secrets.commit_secret }}'
           branch: gh-pages
