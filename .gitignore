@@ -3,7 +3,7 @@
 
 .packages
 .pub/
-demo/
+flutter_ui_site/
 .idea/
 .vagrant/
 .sconsign.dblite
