@@ -20,12 +20,11 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
-      - run: cd example
       - run: flutter pub get
       - run: ls
-      - run: flutter build web --web-renderer canvaskit --release
+      - run: cd example && flutter build web --web-renderer canvaskit --release
       - run: |
-          cd build/web
+          cd example/build/web
           git init
           # type configurations: your user.email and user.name followed lines 
           git config --global user.email yk3372@gmail.com 
