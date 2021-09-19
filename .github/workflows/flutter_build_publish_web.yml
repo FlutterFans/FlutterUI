@@ -9,30 +9,29 @@ on:
   push:
     branches: [ master ]
 jobs:
-  build:
-    name: Build Web
+  web_build_and_deploy:
+    name: Web
     env:
       my_secret: ${{secrets.commit_secret}}
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v1
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@v2
+      # https://github.com/marketplace/actions/flutter-action
       - uses: subosito/flutter-action@v1
         with:
+          flutter-version: '2.5.0'
           channel: 'stable'
-      - run: flutter pub get
-      - run: ls
-      - run: cd example && flutter build web --web-renderer canvaskit --release
-      - run: |
-          cd example/build/web
-          git init
-          # type configurations: your user.email and user.name followed lines 
-          git config --global user.email yk3372@gmail.com 
-          git config --global user.name yk3372 
-          git status
-          # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
-          git remote add origin https://${{secrets.commit_secret}}@github.com/FlutterFans/FlutterUI.git
-          git checkout -b gh-pages
-          git add --all
-          git commit -m "update"
-          git push origin gh-pages -f
+      - name: "Web Build 🔧"
+        run: |
+          cd example
+          flutter pub get
+          flutter build web --web-renderer canvaskit --release
+      - name: "Web Deploy 🚀"
+        # https://github.com/JamesIves/github-pages-deploy-action
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          token: '${{ secrets.commit_secret }}'
+          branch: gh-pages
+          folder: example/build/web
