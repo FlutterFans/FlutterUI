@@ -1,0 +1,40 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Flutter Web
+
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    name: Build Web
+    env:
+      my_secret: ${{secrets.commit_secret}}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'dev'
+      - run: cd example
+      - run: flutter doctor
+      - run: flutter config --enable-web
+      - run: flutter pub get
+      - run: flutter build web --web-renderer canvaskit --release
+      - run: |
+          cd build/web
+          git init
+          # type configurations: your user.email and user.name followed lines 
+          git config --global user.email yk3372@gmail.com 
+          git config --global user.name yk3372 
+          git status
+          # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
+          git remote add origin https://${{secrets.commit_secret}}@github.com:FlutterFans/FlutterUI.git
+          git checkout -b gh-pages
+          git add --all
+          git commit -m "update"
+          git push origin gh-pages -f
