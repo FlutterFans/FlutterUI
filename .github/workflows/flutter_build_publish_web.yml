@@ -27,7 +27,7 @@ jobs:
         run: |
           cd example
           flutter pub get
-          flutter build web --web-renderer canvaskit --release
+          flutter build web --web-renderer canvaskit --release --base-href="/FlutterUI/"
       - name: "Web Deploy 🚀"
         # https://github.com/JamesIves/github-pages-deploy-action
         uses: JamesIves/github-pages-deploy-action@4.1.5
