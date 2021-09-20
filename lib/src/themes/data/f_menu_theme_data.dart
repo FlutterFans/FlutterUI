@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FButtonThemeDataDark extends FButtonThemeData {
-  const FButtonThemeDataDark({
+class FMenuThemeDataDark extends FMenuThemeData {
+  const FMenuThemeDataDark({
     Color normalColor = Colors.black,
     Color selectedColor = Colors.red,
   }) : super(
@@ -10,20 +10,20 @@ class FButtonThemeDataDark extends FButtonThemeData {
         );
 }
 
-class FButtonThemeData {
+class FMenuThemeData {
   final Color normalColor;
   final Color selectedColor;
 
-  const FButtonThemeData({
+  const FMenuThemeData({
     this.normalColor = Colors.green,
     this.selectedColor = Colors.blue,
   });
 
-  FButtonThemeData copyWith({
+  FMenuThemeData copyWith({
     Color? normalColor,
     Color? selectedColor,
   }) {
-    return FButtonThemeData(
+    return FMenuThemeData(
       normalColor: normalColor ?? this.normalColor,
       selectedColor: selectedColor ?? this.selectedColor,
     );
@@ -34,7 +34,7 @@ class FButtonThemeData {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is FButtonThemeData && other.normalColor == normalColor;
+    return other is FMenuThemeData && other.normalColor == normalColor;
   }
 
   @override

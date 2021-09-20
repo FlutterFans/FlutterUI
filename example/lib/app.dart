@@ -13,16 +13,19 @@ class App extends StatelessWidget {
     return BlocBuilder<GlobalSettingBloc, GlobalSettingState>(
       builder: (context, state) {
         GlobalAppSettings settings = state.globalAppSettings;
-        return AppTheme(
-          fButtonThemeData: settings.fButtonThemeData,
-          child: MaterialApp(
-            title: 'Flutter UI',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home: const PlaygroundPage(),
+        final app = MaterialApp(
+          title: 'Flutter UI',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
           ),
+          home: const PlaygroundPage(),
         );
+        return settings.isDark
+            ? DarkTheme(child: app)
+            : AppTheme(
+                fButtonThemeData: settings.fButtonThemeData,
+                child: app,
+              );
       },
     );
   }

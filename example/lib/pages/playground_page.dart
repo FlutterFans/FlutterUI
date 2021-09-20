@@ -11,7 +11,6 @@ class PlaygroundPage extends StatefulWidget {
 class _PlaygroundPageState extends State<PlaygroundPage> {
   @override
   Widget build(BuildContext context) {
-    final aa = MediaQuery.of(context).devicePixelRatio;
     return const Scaffold(
       body: ExFContainer(),
     );

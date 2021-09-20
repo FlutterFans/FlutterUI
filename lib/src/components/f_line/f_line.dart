@@ -4,6 +4,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ui/flutter_ui.dart';
 
+import '../base_widget.dart';
+
 // vertical line
 class FVLine extends _FLine {
   const FVLine({
@@ -44,7 +46,7 @@ class FHLine extends _FLine {
         );
 }
 
-class _FLine extends StatelessWidget {
+class _FLine extends BaseWidget {
   const _FLine({
     Key? key,
     this.isDash = false,
