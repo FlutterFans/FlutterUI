@@ -4,6 +4,7 @@ class FMenuThemeDataDark extends FMenuThemeData {
   const FMenuThemeDataDark({
     double menuFontSize = 14,
     Color menuBackgroundColor = const Color(0xff001529),
+    Color subMenuBackgroundColor = const Color(0xff000f16),
     Color normalTextColor = const Color(0xa6ffffff),
     Color pressedTextColor = Colors.white,
     Color focusTextColor = Colors.white,
@@ -16,6 +17,7 @@ class FMenuThemeDataDark extends FMenuThemeData {
     Color groupTextColor = const Color(0xff909399),
   }) : super(
           menuBackgroundColor: menuBackgroundColor,
+          subMenuBackgroundColor: subMenuBackgroundColor,
           menuFontSize: menuFontSize,
           normalTextColor: normalTextColor,
           pressedTextColor: pressedTextColor,
@@ -36,6 +38,9 @@ class FMenuThemeData {
 
   /// 菜单背景颜色
   final Color menuBackgroundColor;
+
+  /// 子菜单背景颜色
+  final Color subMenuBackgroundColor;
 
   /// 菜单正常态字体颜色
   final Color normalTextColor;
@@ -68,6 +73,7 @@ class FMenuThemeData {
   const FMenuThemeData({
     this.menuFontSize = 14,
     this.menuBackgroundColor = Colors.white,
+    this.subMenuBackgroundColor = const Color(0xfff9f9f9),
     this.normalTextColor = const Color(0xff333333),
     this.pressedTextColor = const Color(0xff1890ff),
     this.focusTextColor = const Color(0xff1890ff),
@@ -82,6 +88,8 @@ class FMenuThemeData {
 
   FMenuThemeData copyWith({
     double? menuFontSize,
+    Color? menuBackgroundColor,
+    Color? subMenuBackgroundColor,
     Color? normalTextColor,
     Color? pressedTextColor,
     Color? focusTextColor,
@@ -95,6 +103,8 @@ class FMenuThemeData {
   }) {
     return FMenuThemeData(
       menuFontSize: menuFontSize ?? this.menuFontSize,
+      menuBackgroundColor: menuBackgroundColor ?? this.menuBackgroundColor,
+      subMenuBackgroundColor: subMenuBackgroundColor ?? this.subMenuBackgroundColor,
       normalTextColor: normalTextColor ?? this.normalTextColor,
       pressedTextColor: pressedTextColor ?? this.pressedTextColor,
       focusTextColor: focusTextColor ?? this.focusTextColor,
