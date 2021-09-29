@@ -5,6 +5,7 @@
 //  Created by yukai on 2021/9/29.
 //  Copyright ©2021/9/29 flutter_ui. All Rights Reserved.
 //
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ui/flutter_ui.dart';
 
@@ -42,8 +43,10 @@ class InlineMenuHandler {
           ));
         } else if (item is FMenuGroup) {
           newItems.add(Container(
+            height: fGroupMenuItemHeight,
+            alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(
-              left: menuItemPadding + fMenuGroupPaddingLeft,
+              left: menuItemPadding,
             ),
             child: Text(
               item.groupTitle,
@@ -55,7 +58,7 @@ class InlineMenuHandler {
           ));
           newItems.addAll(_handleInlineChildren(
             item.children,
-            menuItemPadding + fMenuGroupPaddingLeft, // menuGroup 跟menu对齐
+            menuItemPadding, // menuGroup 跟menu对齐
             menuThemeData,
           ));
         } else if (item is FSubMenu) {

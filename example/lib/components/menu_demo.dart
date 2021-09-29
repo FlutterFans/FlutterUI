@@ -25,53 +25,44 @@ class MenuDemo extends StatelessWidget {
       },
       children: [
         FMenuItem(
-          menuKey: 'FMenuItem1',
-          child: Row(
-            children: [
-              Icon(Icons.access_alarm),
-              Text('FMenuItem1'),
-            ],
-          ),
+          menuKey: 'FSubMenuItem2',
+          child: Text('Option Single 1'),
         ),
         FMenuItem(
-          menuKey: 'FMenuItem2',
-          child: Text('FMenuItem2'),
+          menuKey: 'FSubMenuItem2',
+          child: Text('Option Single 2'),
         ),
         FSubMenu(
-          subMenuTitle: 'FSubSubMenu1',
+          subMenuTitle: 'Navigator One',
           children: [
             FMenuGroup(
-              groupTitle: 'GroupTitle',
+              groupTitle: 'Group One',
               children: [
                 FMenuItem(
-                  menuKey: 'FMenuItemGroup1',
-                  child: Text('FMenuItemGroup1'),
+                  menuKey: 'item1',
+                  child: Text('item one'),
                 ),
                 FMenuItem(
-                  menuKey: 'FMenuItemGroup2',
-                  child: Text('FMenuItemGroup2'),
+                  menuKey: 'item2',
+                  child: Text('item Two'),
                 ),
                 FMenuGroup(
-                  groupTitle: 'GroupTitle1',
+                  groupTitle: 'Group Two',
                   children: [
                     FMenuItem(
                       menuKey: 'FMenuItemGroup11',
-                      child: Text('FMenuItemGroup11'),
-                    ),
-                    FMenuItem(
-                      menuKey: 'FMenuItemGroup21',
-                      child: Text('FMenuItemGroup21'),
+                      child: Text('item three'),
                     ),
                     FSubMenu(
-                      subMenuTitle: 'FSubSubMenu21',
+                      subMenuTitle: 'item four',
                       children: [
                         FMenuItem(
                           menuKey: 'FSubSubMenuItem1222',
-                          child: Text('FSubSubMenuItem1222'),
+                          child: Text('item one'),
                         ),
                         FMenuItem(
                           menuKey: 'FSubSubMenuItem2111',
-                          child: Text('FSubSubMenuItem2111'),
+                          child: Text('item two'),
                         ),
                       ],
                     )
@@ -82,29 +73,46 @@ class MenuDemo extends StatelessWidget {
           ],
         ),
         FSubMenu(
-          subMenuTitle: 'FSubSubMenu1',
+          subMenuTitle: 'Navigation Two',
           children: [
             FMenuItem(
               menuKey: 'FSubMenuItem1',
-              child: Text('FSubMenuItem1'),
+              child: Text('Option 5'),
             ),
             FMenuItem(
               menuKey: 'FSubMenuItem2',
-              child: Text('FSubMenuItem2'),
+              child: Text('Option 6'),
             ),
             FSubMenu(
-              subMenuTitle: 'FSubSubMenu2',
+              subMenuTitle: 'Submenu',
               children: [
                 FMenuItem(
                   menuKey: 'FSubSubMenuItem1',
-                  child: Text('FSubSubMenuItem1'),
+                  child: Text('Option 7'),
                 ),
                 FMenuItem(
                   menuKey: 'FSubSubMenuItem2',
-                  child: Text('FSubSubMenuItem2'),
+                  child: Text('Option 8'),
                 ),
               ],
             )
+          ],
+        ),
+        FMenuItem(
+          menuKey: 'FSubMenuItem2',
+          child: Text('Option Single 3'),
+        ),
+        FSubMenu(
+          subMenuTitle: 'Navigation Three',
+          children: [
+            FMenuItem(
+              menuKey: 'FSubMenuItem1',
+              child: Text('Option 5'),
+            ),
+            FMenuItem(
+              menuKey: 'FSubMenuItem2',
+              child: Text('Option 6'),
+            ),
           ],
         ),
       ],
