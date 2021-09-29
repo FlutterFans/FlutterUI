@@ -19,9 +19,12 @@ class GlobalSettingBloc extends Bloc<GlobalSettingEvent, GlobalSettingState> {
   Stream<GlobalSettingState> mapEventToState(
     GlobalSettingEvent event,
   ) async* {
+    final settings = GlobalAppSettings.globalAppSettings;
     if (event is ChangeButtonTheme) {
-      final settings = GlobalAppSettings.globalAppSettings;
       settings.fButtonThemeData = event.fButtonThemeData;
+      yield GlobalSettingInitial(globalAppSettings: settings);
+    } else if (event is SwitchDarkTheme) {
+      settings.isDark = event.isChangeToDark;
       yield GlobalSettingInitial(globalAppSettings: settings);
     }
   }

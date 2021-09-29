@@ -16,16 +16,15 @@ class App extends StatelessWidget {
         final app = MaterialApp(
           title: 'Flutter UI',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.red,
           ),
           home: const PlaygroundPage(),
         );
-        return settings.isDark
-            ? DarkTheme(child: app)
-            : AppTheme(
-                fButtonThemeData: settings.fButtonThemeData,
-                child: app,
-              );
+        return AppTheme(
+          child: app,
+          fButtonThemeData: settings.fButtonThemeData,
+          fMenuThemeData: !settings.isDark ? FMenuThemeData() : FMenuThemeDataDark(),
+        );
       },
     );
   }

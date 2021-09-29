@@ -8,3 +8,9 @@ class ChangeButtonTheme extends GlobalSettingEvent {
 
   ChangeButtonTheme({required this.fButtonThemeData});
 }
+
+class SwitchDarkTheme extends GlobalSettingEvent {
+  final bool isChangeToDark;
+
+  SwitchDarkTheme({required this.isChangeToDark});
+}

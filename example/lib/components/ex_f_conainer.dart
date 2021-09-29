@@ -1,7 +1,9 @@
-import 'dart:io';
-
+import 'package:example/blocs/global/global_setting_bloc.dart';
+import 'package:example/components/menu_demo.dart';
+import 'package:example/config/global_app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/flutter_ui.dart';
+import 'package:provider/src/provider.dart';
 
 class ExFContainer extends StatelessWidget {
   const ExFContainer({Key? key}) : super(key: key);
@@ -14,23 +16,7 @@ class ExFContainer extends StatelessWidget {
       children: [
         FHeader(
           height: 80,
-          child: Row(
-            children: [
-              Text(
-                'Flutter UI',
-                style: TextStyle(
-                  color: buttonTheme.normalColor,
-                  fontSize: 28,
-                ),
-              ),
-              LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-                  return Text(
-                      'Header: ${constraints.maxWidth} * ${constraints.maxHeight}');
-                },
-              )
-            ],
-          ),
+          child: buildHeader(buttonTheme, context),
         ),
         FHLine(),
         FContainer(
@@ -50,20 +36,16 @@ class ExFContainer extends StatelessWidget {
               children: [
                 FMain(
                   child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      return Text(
-                          'Main Size: ${constraints.maxWidth} * ${constraints.maxHeight}');
+                    builder: (BuildContext context, BoxConstraints constraints) {
+                      return Text('Main Size: ${constraints.maxWidth} * ${constraints.maxHeight}');
                     },
                   ),
                 ),
                 FHLine(),
                 FFooter(
                   child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      return Text(
-                          'Footer: ${constraints.maxWidth} * ${constraints.maxHeight}');
+                    builder: (BuildContext context, BoxConstraints constraints) {
+                      return Text('Footer: ${constraints.maxWidth} * ${constraints.maxHeight}');
                     },
                   ),
                 ),
@@ -74,64 +56,41 @@ class ExFContainer extends StatelessWidget {
       ],
     );
   }
-}
 
-class MenuDemo extends StatelessWidget {
-  const MenuDemo({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FMenu(
-      children: [
-        FMenuItem(
-          child: Text('FMenuItem1'),
-        ),
-        FMenuItem(
-          child: Text('FMenuItem2'),
-        ),
-        FMenuGroup(
-          groupTitle: 'GroupTitle',
+  Row buildHeader(FButtonThemeData buttonTheme, BuildContext context) {
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            FMenuItem(
-              child: Text('FMenuItemGroup1'),
+            Text(
+              'Flutter UI',
+              style: TextStyle(
+                color: buttonTheme.normalColor,
+                fontSize: 28,
+              ),
             ),
-            FMenuItem(
-              child: Text('FMenuItemGroup2'),
-            ),
-            FMenuGroup(
-              groupTitle: 'GroupTitle1',
+            Row(
               children: [
-                FMenuItem(
-                  child: Text('FMenuItemGroup11'),
+                Switch(
+                  value: GlobalAppSettings.globalAppSettings.isDark,
+                  onChanged: (value) {
+                    context.read<GlobalSettingBloc>().add(
+                          SwitchDarkTheme(isChangeToDark: !GlobalAppSettings.globalAppSettings.isDark),
+                        );
+                  },
                 ),
-                FMenuItem(
-                  child: Text('FMenuItemGroup21'),
+                SizedBox(
+                  width: 60,
+                  child: Text(
+                    !GlobalAppSettings.globalAppSettings.isDark ? 'Day' : 'Night',
+                    style: TextStyle(
+                      color: buttonTheme.normalColor,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
               ],
             ),
           ],
-        ),
-        FSubMenu(
-          children: [
-            FMenuItem(
-              child: Text('FSubMenuItem1'),
-            ),
-            FMenuItem(
-              child: Text('FSubMenuItem2'),
-            ),
-            FSubMenu(children: [
-              FMenuItem(
-                child: Text('FSubSubMenuItem1'),
-              ),
-              FMenuItem(
-                child: Text('FSubSubMenuItem2'),
-              ),
-            ])
-          ],
-        ),
-      ],
-    );
+        );
   }
 }
