@@ -21,8 +21,8 @@ jobs:
       # https://github.com/marketplace/actions/flutter-action
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.5.0'
-          channel: 'stable'
+          #flutter-version: '2.5.0'
+          channel: 'master'
       - name: "Web Build 🔧"
         run: |
           cd example
