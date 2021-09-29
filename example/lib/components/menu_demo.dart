@@ -25,10 +25,12 @@ class MenuDemo extends StatelessWidget {
       },
       children: [
         FMenuItem(
+          icon: Icon(Icons.access_alarm),
           menuKey: 'FSubMenuItem2',
           child: Text('Option Single 1'),
         ),
         FMenuItem(
+          icon: Icon(Icons.event),
           menuKey: 'FSubMenuItem2',
           child: Text('Option Single 2'),
         ),
@@ -74,6 +76,7 @@ class MenuDemo extends StatelessWidget {
         ),
         FSubMenu(
           subMenuTitle: 'Navigation Two',
+          icon: Icon(Icons.access_alarm),
           children: [
             FMenuItem(
               menuKey: 'FSubMenuItem1',

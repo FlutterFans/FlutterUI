@@ -52,6 +52,28 @@ class _InlineSubMenuWrapperState extends State<InlineSubMenuWrapper> {
   @override
   Widget build(BuildContext context) {
     final menuThemeData = AppTheme.of(context).fMenuThemeData;
+    Widget title = Text(
+      widget.item.subMenuTitle,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    );
+    if (widget.item.icon != null) {
+      title = Row(
+        children: [
+          Transform(
+            transform: Matrix4.translationValues(0, 1, 0),
+            child: IconTheme.merge(
+              data: IconThemeData(
+                size: menuThemeData.menuFontSize,
+              ),
+              child: widget.item.icon!,
+            ),
+          ),
+          const SizedBox(width: 10),
+          title,
+        ],
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,11 +105,7 @@ class _InlineSubMenuWrapperState extends State<InlineSubMenuWrapper> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.item.subMenuTitle,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                title,
                 Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more,
                   color: const Color(0xff909399),
