@@ -15,6 +15,8 @@ class App extends StatelessWidget {
         GlobalAppSettings settings = state.globalAppSettings;
         final app = MaterialApp(
           title: 'Flutter UI',
+          builder: OverLayerBuilder(),
+          navigatorObservers: [OverLayerObserver()],
           theme: ThemeData(
             primarySwatch: Colors.red,
           ),

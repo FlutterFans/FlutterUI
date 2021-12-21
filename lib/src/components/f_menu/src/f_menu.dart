@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/flutter_ui.dart';
 
-import '_inner/inline_menu_handler.dart';
+import '_inner/inline/inline_menu_handler.dart';
+import '_inner/vertical/vertical_menu_handler.dart';
 import 'f_base_menu.dart';
 
 enum FMenuMode { vertical, horizontal, inline }
@@ -42,8 +43,22 @@ class _FMenuState extends State<FMenu> {
       // content = Row(
       //   children: widget.children,
       // );
-    } else {
+    } else if (widget.mode == FMenuMode.inline) {
       final newWidgets = InlineMenuHandler.createInlineMenu(
+        widget.children,
+        appTheme,
+        focusNodes,
+        widget.onMenuClick,
+      );
+      content = SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: newWidgets,
+        ),
+      );
+    } else {
+      final newWidgets = VerticalMenuHandler.createInlineMenu(
         widget.children,
         appTheme,
         focusNodes,

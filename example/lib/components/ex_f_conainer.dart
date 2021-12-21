@@ -3,7 +3,7 @@ import 'package:example/components/menu_demo.dart';
 import 'package:example/config/global_app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ui/flutter_ui.dart';
-import 'package:provider/src/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExFContainer extends StatelessWidget {
   const ExFContainer({Key? key}) : super(key: key);

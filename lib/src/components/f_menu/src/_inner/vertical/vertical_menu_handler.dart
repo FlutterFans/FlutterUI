@@ -8,13 +8,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ui/flutter_ui.dart';
+import 'package:flutter_ui/src/components/f_menu/src/_inner/inline/inline_menu_wrapper.dart';
+import 'package:flutter_ui/src/components/f_menu/src/_inner/inline/inline_submenu_wrapper.dart';
 
-import '../f_base_menu.dart';
-import '../f_menu_constants.dart';
-import 'inline_menu_wrapper.dart';
-import 'inline_submenu_wrapper.dart';
+import '../../f_base_menu.dart';
+import '../../f_menu_constants.dart';
+import 'vertical_submenu_wrapper.dart';
 
-class InlineMenuHandler {
+class VerticalMenuHandler {
   static List<Widget> createInlineMenu(
     List<FBaseMenu> children,
     AppTheme appTheme,
@@ -62,7 +63,7 @@ class InlineMenuHandler {
             menuThemeData,
           ));
         } else if (item is FSubMenu) {
-          newItems.add(InlineSubMenuWrapper(
+          newItems.add(VerticalSubMenuWrapper(
             menuItemPadding: menuItemPadding,
             item: item,
             onMenuClick: onMenuClick,

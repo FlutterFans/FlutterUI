@@ -6,10 +6,12 @@ class FSubMenu extends FBaseMenu {
   final List<FBaseMenu> children;
   final String subMenuTitle;
   final Widget? icon;
+  final bool isExpanded;
 
   FSubMenu({
     required this.children,
     required this.subMenuTitle,
-    this.icon
+    this.icon,
+    this.isExpanded = false,
   });
 }

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ui/flutter_ui.dart';
 import 'package:flutter_ui/utils/ui_styles.dart';
 
-import '../f_menu_constants.dart';
+import '../../f_menu_constants.dart';
 
 class InlineMenuWrapper extends StatelessWidget {
   final FocusNode? node;
