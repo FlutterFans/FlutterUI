@@ -14,12 +14,15 @@ class FMenu extends StatefulWidget {
   final FMenuMode mode;
   final MenuClick onMenuClick;
   final List<dynamic>? selectedMenuKeys;
+  /// 是否菜单默认展开（inline）
+  final bool isDefaultMenuOpen;
 
   const FMenu({
     Key? key,
     required this.children,
     required this.onMenuClick,
     this.selectedMenuKeys,
+    this.isDefaultMenuOpen = false,
     this.mode = FMenuMode.inline,
   }) : super(key: key);
 
@@ -50,6 +53,7 @@ class _FMenuState extends State<FMenu> {
         appTheme: appTheme,
         onMenuClick: widget.onMenuClick,
         selectedMenuKeys: widget.selectedMenuKeys,
+        isDefaultMenuOpen: widget.isDefaultMenuOpen,
       );
       content = SingleChildScrollView(
         scrollDirection: Axis.vertical,

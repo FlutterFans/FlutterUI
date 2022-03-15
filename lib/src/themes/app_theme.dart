@@ -10,11 +10,14 @@ export 'dimens/f_dimens.dart';
 
 /// Normal Theme
 class AppTheme extends InheritedWidget {
+  final bool isDarkMode;
   final FButtonThemeData fButtonThemeData;
   final FMenuThemeData fMenuThemeData;
 
+
   const AppTheme({
     Key? key,
+    this.isDarkMode = false,
     this.fButtonThemeData = const FButtonThemeData(),
     this.fMenuThemeData = const FMenuThemeData(),
     required Widget child,

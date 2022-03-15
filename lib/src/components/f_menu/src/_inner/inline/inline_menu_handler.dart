@@ -21,6 +21,7 @@ class InlineMenuHandler {
     required AppTheme appTheme,
     required MenuClick onMenuClick,
     List<dynamic>? selectedMenuKeys,
+    required bool isDefaultMenuOpen,
   }) {
     double initPadding = fMenuPaddingLeft;
     final menuThemeData = appTheme.fMenuThemeData;
@@ -84,7 +85,7 @@ class InlineMenuHandler {
           newItems.add(InlineSubMenuWrapper(
             menuItemPadding: menuItemPadding,
             item: item,
-            isExpanded: item == selectedParentMenu || item.isExpanded,
+            isExpanded: isDefaultMenuOpen || item == selectedParentMenu || item.isExpanded,
             onMenuClick: onMenuClick,
             children: result.item1,
           ));
