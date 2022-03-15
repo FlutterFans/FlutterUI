@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ui/flutter_ui.dart';
+import 'package:tuple/tuple.dart';
 
 import '../../f_base_menu.dart';
 import '../../f_menu_constants.dart';
@@ -15,33 +16,46 @@ import 'inline_menu_wrapper.dart';
 import 'inline_submenu_wrapper.dart';
 
 class InlineMenuHandler {
-  static List<Widget> createInlineMenu(
-    List<FBaseMenu> children,
-    AppTheme appTheme,
-    List<FocusNode> focusNodes,
-    MenuClick onMenuClick,
-  ) {
+  static List<Widget> createInlineMenu({
+    required List<FBaseMenu> children,
+    required AppTheme appTheme,
+    required MenuClick onMenuClick,
+    List<dynamic>? selectedMenuKeys,
+  }) {
     double initPadding = fMenuPaddingLeft;
-    focusNodes.clear();
     final menuThemeData = appTheme.fMenuThemeData;
 
-    List<Widget> _handleInlineChildren(
+    Tuple2<List<Widget>, FBaseMenu?> _handleInlineChildren(
       List<FBaseMenu> children,
       double menuItemPadding,
       FMenuThemeData menuThemeData,
+      FBaseMenu? parentMenu,
     ) {
       List<Widget> newItems = [];
+      FBaseMenu? selectedParentMenu;
       for (var item in children) {
         if (item is FMenuItem) {
-          final node = FocusNode();
-          focusNodes.add(node);
+          bool isSelected = false;
+          if (selectedMenuKeys != null && selectedMenuKeys.contains(item.menuKey)) {
+            isSelected = true;
+            selectedParentMenu = parentMenu;
+          }
           newItems.add(InlineMenuWrapper(
             menuItemPadding: menuItemPadding,
-            node: node,
             item: item,
+            isSelected: isSelected,
             onMenuClick: onMenuClick,
           ));
         } else if (item is FMenuGroup) {
+          final result = _handleInlineChildren(
+            item.children,
+            menuItemPadding, // menuGroup 跟menu对齐
+            menuThemeData,
+            item,
+          );
+          if (result.item2 != null) {
+            selectedParentMenu = item;
+          }
           newItems.add(Container(
             height: fGroupMenuItemHeight,
             alignment: Alignment.centerLeft,
@@ -56,28 +70,29 @@ class InlineMenuHandler {
               ),
             ),
           ));
-          newItems.addAll(_handleInlineChildren(
-            item.children,
-            menuItemPadding, // menuGroup 跟menu对齐
-            menuThemeData,
-          ));
+          newItems.addAll(result.item1);
         } else if (item is FSubMenu) {
+          final result = _handleInlineChildren(
+            item.children,
+            menuItemPadding + fSubMenuPaddingLeft,
+            menuThemeData,
+            item,
+          );
+          if (result.item2 != null) {
+            selectedParentMenu = item;
+          }
           newItems.add(InlineSubMenuWrapper(
             menuItemPadding: menuItemPadding,
             item: item,
-            isExpanded: item.isExpanded,
+            isExpanded: item == selectedParentMenu || item.isExpanded,
             onMenuClick: onMenuClick,
-            children: _handleInlineChildren(
-              item.children,
-              menuItemPadding + fSubMenuPaddingLeft,
-              menuThemeData,
-            ),
+            children: result.item1,
           ));
         }
       }
-      return newItems;
+      return Tuple2(newItems, selectedParentMenu);
     }
 
-    return _handleInlineChildren(children, initPadding, menuThemeData);
+    return _handleInlineChildren(children, initPadding, menuThemeData, null).item1;
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_ui/src/components/f_menu/src/f_base_menu.dart';
 import '../../base_widget.dart';
 import 'f_menu_constants.dart';
 
+// 菜单项
 class FMenuItem extends BaseWidget with FBaseMenu {
   final Widget child;
   /// 菜单的唯一标识

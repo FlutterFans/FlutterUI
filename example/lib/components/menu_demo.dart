@@ -18,6 +18,7 @@ class MenuDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FMenu(
+      selectedMenuKeys: ['FSubMenuItem2','item1'],
       onMenuClick: (menuKey) {
         if (kDebugMode) {
           print(menuKey);
@@ -26,12 +27,12 @@ class MenuDemo extends StatelessWidget {
       children: [
         FMenuItem(
           icon: Icon(Icons.access_alarm),
-          menuKey: 'FSubMenuItem2',
+          menuKey: 'FSubMenuItem2222',
           child: Text('Option Single 1'),
         ),
         FMenuItem(
           icon: Icon(Icons.event),
-          menuKey: 'FSubMenuItem2',
+          menuKey: 'FSubMenuItem233',
           child: Text('Option Single 2'),
         ),
         FSubMenu(
@@ -83,7 +84,7 @@ class MenuDemo extends StatelessWidget {
               child: Text('Option 5'),
             ),
             FMenuItem(
-              menuKey: 'FSubMenuItem2',
+              menuKey: 'FSubMenuItem25',
               child: Text('Option 6'),
             ),
             FSubMenu(
@@ -102,7 +103,7 @@ class MenuDemo extends StatelessWidget {
           ],
         ),
         FMenuItem(
-          menuKey: 'FSubMenuItem2',
+          menuKey: 'FSubMenuItem2a',
           child: Text('Option Single 3'),
         ),
         FSubMenu(

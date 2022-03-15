@@ -12,14 +12,14 @@ import 'package:flutter_ui/utils/ui_styles.dart';
 import '../../f_menu_constants.dart';
 
 class InlineMenuWrapper extends StatelessWidget {
-  final FocusNode? node;
   final MenuClick onMenuClick;
   final FMenuItem item;
   final double menuItemPadding;
+  final bool isSelected;
 
   const InlineMenuWrapper({
     Key? key,
-    this.node,
+    this.isSelected = false,
     required this.onMenuClick,
     required this.item,
     this.menuItemPadding = 0,
@@ -31,17 +31,15 @@ class InlineMenuWrapper extends StatelessWidget {
     return TextButton(
       onHover: (bool isHover) {},
       onPressed: () {
-        node?.requestFocus();
         onMenuClick(item.menuKey);
       },
-      focusNode: node,
       style: UIStyles.getCommonButtonStyle(
-        normalColor: menuThemeData.normalColor,
-        pressedColor: menuThemeData.pressedColor,
-        hoverColor: menuThemeData.hoverColor,
+        normalColor: isSelected ? menuThemeData.focusColor : menuThemeData.normalColor,
+        pressedColor: isSelected ? menuThemeData.focusColor : menuThemeData.pressedColor,
+        hoverColor: isSelected ? menuThemeData.focusColor : menuThemeData.hoverColor,
         focusColor: menuThemeData.focusColor,
-        normalTextColor: menuThemeData.normalTextColor,
-        pressedTextColor: menuThemeData.pressedTextColor,
+        normalTextColor: isSelected ? menuThemeData.focusTextColor : menuThemeData.normalTextColor,
+        pressedTextColor: isSelected ? menuThemeData.focusTextColor : menuThemeData.pressedTextColor,
         focusTextColor: menuThemeData.focusTextColor,
         hoverTextColor: menuThemeData.hoverTextColor,
         fontSize: menuThemeData.menuFontSize,

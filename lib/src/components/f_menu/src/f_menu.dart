@@ -13,11 +13,13 @@ class FMenu extends StatefulWidget {
   final List<FBaseMenu> children;
   final FMenuMode mode;
   final MenuClick onMenuClick;
+  final List<dynamic>? selectedMenuKeys;
 
   const FMenu({
     Key? key,
     required this.children,
     required this.onMenuClick,
+    this.selectedMenuKeys,
     this.mode = FMenuMode.inline,
   }) : super(key: key);
 
@@ -26,7 +28,6 @@ class FMenu extends StatefulWidget {
 }
 
 class _FMenuState extends State<FMenu> {
-  List<FocusNode> focusNodes = [];
   late AppTheme appTheme;
 
   @override
@@ -38,17 +39,17 @@ class _FMenuState extends State<FMenu> {
   @override
   Widget build(BuildContext context) {
     final menuThemeData = appTheme.fMenuThemeData;
-    Widget content = SizedBox();
+    Widget content;
     if (widget.mode == FMenuMode.horizontal) {
-      // content = Row(
-      //   children: widget.children,
-      // );
+      content = Row(
+        // children: widget.children,
+      );
     } else if (widget.mode == FMenuMode.inline) {
       final newWidgets = InlineMenuHandler.createInlineMenu(
-        widget.children,
-        appTheme,
-        focusNodes,
-        widget.onMenuClick,
+        children: widget.children,
+        appTheme: appTheme,
+        onMenuClick: widget.onMenuClick,
+        selectedMenuKeys: widget.selectedMenuKeys,
       );
       content = SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -58,10 +59,9 @@ class _FMenuState extends State<FMenu> {
         ),
       );
     } else {
-      final newWidgets = VerticalMenuHandler.createInlineMenu(
+      final newWidgets = VerticalMenuHandler.createVerticalMenu(
         widget.children,
         appTheme,
-        focusNodes,
         widget.onMenuClick,
       );
       content = SingleChildScrollView(

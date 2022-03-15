@@ -9,21 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ui/flutter_ui.dart';
 import 'package:flutter_ui/src/components/f_menu/src/_inner/inline/inline_menu_wrapper.dart';
-import 'package:flutter_ui/src/components/f_menu/src/_inner/inline/inline_submenu_wrapper.dart';
 
 import '../../f_base_menu.dart';
 import '../../f_menu_constants.dart';
 import 'vertical_submenu_wrapper.dart';
 
 class VerticalMenuHandler {
-  static List<Widget> createInlineMenu(
+  static List<Widget> createVerticalMenu(
     List<FBaseMenu> children,
     AppTheme appTheme,
-    List<FocusNode> focusNodes,
     MenuClick onMenuClick,
   ) {
     double initPadding = fMenuPaddingLeft;
-    focusNodes.clear();
     final menuThemeData = appTheme.fMenuThemeData;
 
     List<Widget> _handleInlineChildren(
@@ -34,11 +31,8 @@ class VerticalMenuHandler {
       List<Widget> newItems = [];
       for (var item in children) {
         if (item is FMenuItem) {
-          final node = FocusNode();
-          focusNodes.add(node);
           newItems.add(InlineMenuWrapper(
             menuItemPadding: menuItemPadding,
-            node: node,
             item: item,
             onMenuClick: onMenuClick,
           ));
