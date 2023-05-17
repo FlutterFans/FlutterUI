@@ -30,7 +30,7 @@ class FMenuGroup extends FBaseMenu {
   }
 
   @override
-  int get hashCode {children.hashCode
+  int get hashCode {
     return groupTitle.hashCode;
   }
 }
